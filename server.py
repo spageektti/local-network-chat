@@ -3,6 +3,15 @@ import threading
 
 clients = []
 
+def broadcast(message, sender_socket):
+    for client in clients:
+        if client != sender_socket:
+            try:
+                client.send(message.encode('utf-8'))
+            except:
+                client.close()
+                clients.remove(client)
+
 def handle_client(client_socket, addr):
     print(f"Client {addr} connected.")
     clients.append(client_socket)
@@ -13,6 +22,7 @@ def handle_client(client_socket, addr):
             if not message:
                 break
             print(f"Client {addr}: {message}")
+            broadcast(message, client_socket)  # Broadcast the message
         except:
             break
 
