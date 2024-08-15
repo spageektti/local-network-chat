@@ -1,5 +1,6 @@
 import socket
 import threading
+import argparse
 
 def receive_messages(client_socket):
     while True:
@@ -22,4 +23,9 @@ def start_client(host='127.0.0.1', port=12345):
         client_socket.send(message.encode('utf-8'))
 
 if __name__ == "__main__":
-    start_client()
+    parser = argparse.ArgumentParser(description='Chat Client')
+    parser.add_argument('--host', type=str, default='127.0.0.1', help='Server host to connect to')
+    parser.add_argument('--port', type=int, default=12345, help='Server port to connect to')
+    args = parser.parse_args()
+    
+    start_client(args.host, args.port)
