@@ -37,9 +37,16 @@ def start_server(host='0.0.0.0', port=12345):
     server.listen(5)
     print(f"Server listening on {host}:{port}")
 
-    while True:
-        client_socket, addr = server.accept()
-        threading.Thread(target=handle_client, args=(client_socket, addr)).start()
+    try:
+        while True:
+            client_socket, addr = server.accept()
+            threading.Thread(target=handle_client, args=(client_socket, addr)).start()
+    except KeyboardInterrupt:
+        print("\nServer shutting down.")
+    finally:
+        for client in clients:
+            client.close()
+        server.close()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Chat Server')
