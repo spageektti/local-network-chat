@@ -1,5 +1,6 @@
 import socket
 import threading
+import argparse
 
 clients = []
 
@@ -41,4 +42,9 @@ def start_server(host='0.0.0.0', port=12345):
         threading.Thread(target=handle_client, args=(client_socket, addr)).start()
 
 if __name__ == "__main__":
-    start_server()
+    parser = argparse.ArgumentParser(description='Chat Server')
+    parser.add_argument('--host', type=str, default='0.0.0.0', help='Host to bind the server to')
+    parser.add_argument('--port', type=int, default=12345, help='Port to bind the server to')
+    args = parser.parse_args()
+    
+    start_server(args.host, args.port)
