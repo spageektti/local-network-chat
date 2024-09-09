@@ -1,5 +1,5 @@
 # Local Network Chat
-
+![https://cloud-4ddqblov8-hack-club-bot.vercel.app/0zrzut_ekranu_20240823_170955.png](https://cloud-4ddqblov8-hack-club-bot.vercel.app/0zrzut_ekranu_20240823_170955.png)
 This project implements a simple local network chat application using Python's `socket` and `threading` libraries. It consists of a chat server (`server.py`) and a chat client (`client.py`). Clients can connect to the server and exchange messages with each other in real time.
 
 ## Features
